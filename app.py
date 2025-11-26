@@ -63,8 +63,8 @@ def recommend(movie_title, n=5):
     return movies["clean_title"].iloc[movie_indices].apply(restore_title).tolist()
 
 
-st.title("Movie Recommender System")
-st.write("Hybrid model using **Content + Collaborative Filtering**")
+st.title("Movie Recommender!")
+st.write("A Hybrid model using **Content + Collaborative Filtering**")
 
 movie_list = sorted(movies["clean_title"].apply(restore_title).unique())
 
