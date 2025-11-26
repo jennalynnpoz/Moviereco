@@ -31,17 +31,15 @@ tfidf_matrix = tfidf.fit_transform(movies["tags"])
 
 content_sim = cosine_similarity(tfidf_matrix)
 
-user_movie_matrix = small_data.pivot_table(
-index="userId", columns="movieId", values="rating"
-)
+user_movie_matrix = small_data.pivot_table(index="userId", columns="movieId", values="rating")
 
 user_movie_matrix = user_movie_matrix.fillna(0)
 cs_sim = cosine_similarity(user_movie_matrix.T)
 
-content_w = 0.7
-collab_w = 0.3
+cOntent = 0.7
+cOllab = 0.3
 
-hybrid_sim = (content_w * content_sim) + (collab_w * cs_sim)
+hybrid_sim = (cOntent * content_sim) + (cOllab * cs_sim)
 
 def restore_title(t):
     if ", The" in t:
@@ -68,7 +66,7 @@ st.write("A Hybrid model using **Content + Collaborative Filtering**")
 
 movie_list = sorted(movies["clean_title"].apply(restore_title).unique())
 
-choice = st.selectbox("Choose a movie:", movie_list)
+choice = st.selectbox("Choose or Type a movie:", movie_list)
 
 recs = recommend(choice)
 if st.button("Get Recommendations"):
